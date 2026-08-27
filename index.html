@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$DIDI — Decentralized Intelligent Driving Infrastructure</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: #0a0a0a; color: #fff; overflow-x: hidden; }
+        .floating-icons { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+        .floating-icons span { position: absolute; display: block; font-size: 3rem; animation: float 15s linear infinite; opacity: 0.1; }
+        @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); } 100% { transform: translateY(-10vh) rotate(720deg); } }
+        .floating-icons span:nth-child(1) { left: 10%; animation-duration: 18s; }
+        .floating-icons span:nth-child(2) { left: 30%; animation-duration: 22s; font-size: 5rem; }
+        .floating-icons span:nth-child(3) { left: 55%; animation-duration: 14s; }
+        .floating-icons span:nth-child(4) { left: 75%; animation-duration: 20s; font-size: 6rem; }
+        .floating-icons span:nth-child(5) { left: 90%; animation-duration: 16s; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #222; margin-bottom: 40px; flex-wrap: wrap; gap: 15px; }
+        .logo { font-size: 2rem; font-weight: 800; color: #ff3333; letter-spacing: -1px; }
+        .nav-links { display: flex; gap: 25px; flex-wrap: wrap; }
+        .nav-links a { color: #aaa; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: #ff3333; }
+        .nav-links a.active { color: #fff; border-bottom: 2px solid #ff3333; padding-bottom: 5px; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 30px 0; flex-wrap: wrap; gap: 30px; }
+        .header-left h1 { font-size: 4rem; background: linear-gradient(135deg, #ff3333, #cc0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        .header-left p { font-size: 1.2rem; color: #aaa; max-width: 500px; }
+        .price-card { background: #1a1a1a; padding: 30px; border-radius: 20px; border: 1px solid #333; min-width: 280px; }
+        .price-card .label { color: #888; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .price-card .value { font-size: 2.5rem; font-weight: bold; color: #ff3333; }
+        .price-card .change { color: #00cc66; font-size: 1rem; }
+        .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin: 40px 0; }
+        .stat-card { background: #1a1a1a; padding: 20px; border-radius: 15px; border: 1px solid #222; text-align: center; }
+        .stat-card .label { color: #888; font-size: 0.8rem; text-transform: uppercase; }
+        .stat-card .value { font-size: 1.5rem; font-weight: bold; color: #fff; margin-top: 5px; }
+        .btn { display: inline-block; padding: 15px 35px; background: #ff3333; color: #fff; font-weight: bold; border-radius: 50px; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; font-size: 1rem; }
+        .btn:hover { transform: scale(1.05); background: #cc0000; }
+        .btn-outline { background: transparent; border: 2px solid #ff3333; color: #ff3333; }
+        .btn-outline:hover { background: #ff3333; color: #fff; }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin: 60px 0; }
+        .feature { background: #1a1a1a; padding: 30px; border-radius: 20px; border: 1px solid #222; text-align: center; transition: 0.3s; }
+        .feature:hover { border-color: #ff3333; transform: translateY(-10px); }
+        .feature .icon { font-size: 3rem; margin-bottom: 15px; }
+        .feature h3 { color: #ff3333; margin-bottom: 10px; }
+        .feature p { color: #aaa; line-height: 1.6; }
+        .region { background: #1a1a1a; padding: 20px; border-radius: 15px; text-align: center; border: 1px solid #333; margin: 30px 0; }
+        .region .flag { font-size: 3rem; }
+        .region h3 { color: #ff3333; }
+        .region .countries { color: #ddd; font-size: 1.1rem; }
+        .market-data { background: #1a1a1a; padding: 30px; border-radius: 20px; border: 1px solid #333; margin: 40px 0; }
+        .market-data h3 { color: #ff3333; margin-bottom: 20px; }
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+        .market-item .label { color: #888; font-size: 0.8rem; }
+        .market-item .value { font-size: 1.2rem; font-weight: bold; }
+        .footer { text-align: center; padding: 40px 0; border-top: 1px solid #222; margin-top: 40px; color: #555; }
+        .footer a { color: #888; text-decoration: none; margin: 0 10px; }
+        .footer a:hover { color: #ff3333; }
+        @media (max-width: 768px) { .header { flex-direction: column; align-items: start; } .header-left h1 { font-size: 2.5rem; } .nav-links { gap: 15px; } }
+    </style>
+</head>
+<body>
+    <div class="floating-icons">
+        <span>🇨🇳</span>
+        <span>🚗</span>
+        <span>🔗</span>
+        <span>⭐</span>
+        <span>💎</span>
+    </div>
+    <div class="container">
+        <nav>
+            <div class="logo">$DIDI</div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Главная</a>
+                <a href="finance.html">Финансы</a>
+                <a href="app.html">Приложение</a>
+                <a href="https://opensea.io/token/solana/E3JyYE8JKTYVYC8Sm558yCDLQBbwv28JJZMm89Gr7MHi" target="_blank">OpenSea</a>
+            </div>
+        </nav>
+
+        <div class="header">
+            <div class="header-left">
+                <h1>Decentralized Intelligent Driving Infrastructure</h1>
+                <p>Региональный токен для Китая и Восточной Азии. Оплата такси, доставки, каршеринга.</p>
+                <div style="margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a href="app.html" class="btn">🚀 Запустить приложение</a>
+                    <a href="finance.html" class="btn btn-outline">📊 Торговать</a>
+                </div>
+            </div>
+            <div class="price-card">
+                <div class="label">Текущая цена (OpenSea)</div>
+                <div class="value">$0.00005000</div>
+                <div class="change">▲ 0.00% (24ч) • FDV: $50B</div>
+                <div style="margin-top: 15px; color: #888; font-size: 0.9rem;">
+                    <div>Холдеров: <strong style="color:#fff;">5</strong></div>
+                    <div>7d объём: <strong style="color:#fff;">$174.4K</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="region">
+            <div class="flag">🇨🇳</div>
+            <h3>Регион действия</h3>
+            <p class="countries">Китай • Гонконг • Тайвань • Сингапур • Япония • Австралия</p>
+        </div>
+
+        <div class="price-grid">
+            <div class="stat-card"><div class="label">Supply</div><div class="value">1,000,000,000,000,000</div></div>
+            <div class="stat-card"><div class="label">Капа (FDV)</div><div class="value">$50 млрд</div></div>
+            <div class="stat-card"><div class="label">Курс к $TAXI</div><div class="value">1 : 2</div></div>
+            <div class="stat-card"><div class="label">7d объём</div><div class="value" style="color: #ffcc00;">$174.4K</div></div>
+        </div>
+
+        <div class="features">
+            <div class="feature"><div class="icon">🚖</div><h3>Такси в Китае</h3><p>Оплата поездок через экосистему Didi.</p></div>
+            <div class="feature"><div class="icon">🍜</div><h3>Доставка еды</h3><p>Оплата доставки из ресторанов и магазинов.</p></div>
+            <div class="feature"><div class="icon">🚗</div><h3>Каршеринг</h3><p>Аренда автомобилей на время.</p></div>
+            <div class="feature"><div class="icon">🌐</div><h3>Мост в мир</h3><p>Обмен на $TAXI и другие глобальные токены.</p></div>
+        </div>
+
+        <div class="market-data">
+            <h3>📊 Рыночные данные (OpenSea)</h3>
+            <div class="market-grid">
+                <div class="market-item"><div class="label">Цена</div><div class="value">$0.00005000</div></div>
+                <div class="market-item"><div class="label">FDV</div><div class="value">$50 млрд</div></div>
+                <div class="market-item"><div class="label">Холдеров</div><div class="value">5</div></div>
+                <div class="market-item"><div class="label">7d Change</div><div class="value" style="color:#888;">0%</div></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="https://goldtaxi.github.io/taxi/">$TAXI</a>
+            <a href="https://goldtaxi.github.io/uber/">$UBER</a>
+            <a href="https://goldtaxi.github.io/dhl/">$DHL</a>
+            <a href="https://goldtaxi.github.io/tip/">$TIP</a>
+            <a href="https://goldtaxi.github.io/grab/">$GRAB</a>
+            <br><br>© 2026 TAXI Ecosystem. Все права защищены.
+        </div>
+    </div>
+</body>
+</html>
